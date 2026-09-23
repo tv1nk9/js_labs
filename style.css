@@ -1,0 +1,97 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d6d6d6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Корпус "телефона" */
+.phone {
+  width: min(360px, 100vw - 24px);
+  background: #000;
+  border-radius: 28px;
+  padding: 10px 18px 26px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Статус-бар */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 6px 0;
+}
+.status-icons { display: flex; gap: 6px; align-items: center; }
+
+/* Дисплей */
+.display-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-height: 130px;
+  padding: 10px 6px 18px;
+}
+.display {
+  color: #fff;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-align: right;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+.display.size-m { font-size: 44px; }   /* длинные числа */
+.display.size-s { font-size: 32px; }   /* очень длинные числа */
+
+.memory-indicator {
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  color: #fff;
+  opacity: 0.55;
+  font-size: 14px;
+}
+.hidden { visibility: hidden; }
+
+/* Сетка кнопок 4 колонки */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+.btn {
+  border: 0;
+  padding: 0;
+  aspect-ratio: 1;              /* круглые кнопки */
+  border-radius: 50%;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.12s ease;
+  user-select: none;
+}
+.btn:active { filter: brightness(1.35); }
+.btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.btn-memory   { background: #a6a6a6; color: #1c1c1c; font-size: 20px; font-weight: 500; }
+.btn-digit    { background: #3b3b3b; color: #fff;    font-size: 26px; }
+.btn-operator { background: #eca44c; color: #fff;    font-size: 26px; font-weight: 500; }
+
+/* Кнопка "0" на две колонки */
+.btn-zero {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  border-radius: 999px;
+}
