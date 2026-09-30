@@ -210,17 +210,17 @@
     if (!button) return;
     const { action, op, digit } = button.dataset;
     switch (action) {
-      case 'digit':    inputDigit(digit);   break;
-      case 'comma':    inputComma();        break;
-      case 'clear':    clearAll();          break;
-      case 'operator': setOperator(op);     break;
-      case 'equals':   equals();            break;
-      case 'percent':  applyPercent();      break;
-      case 'm-save':   memorySave();        break;
-      case 'm-clear':  memoryClear();       break;
-      case 'm-read':   memoryRead();        break;
-      case 'm-plus':   memoryAdd();         break;
-      case 'm-minus':  memorySubtract();    break;
+      case 'digit': inputDigit(digit); break;
+      case 'comma': inputComma(); break;
+      case 'clear': clearAll(); break;
+      case 'operator': setOperator(op); break;
+      case 'equals': equals(); break;
+      case 'percent': applyPercent(); break;
+      case 'm-save': memorySave(); break;
+      case 'm-clear': memoryClear(); break;
+      case 'm-read': memoryRead(); break;
+      case 'm-plus': memoryAdd(); break;
+      case 'm-minus': memorySubtract(); break;
     }
   });
 
