@@ -1,10 +1,8 @@
 (() => {
-  'use strict';
-
-  // DOM
   const display = document.getElementById('display');
   const memoryIndicator = document.getElementById('memory-indicator');
   const buttonsContainer = document.querySelector('.buttons');
+  const statusTime = document.getElementById('status-time');
 
   // Состояние
   const MEMORY_KEY = 'calculator.memory';
@@ -12,7 +10,7 @@
   const state = {
     current: '0',
     accumulator: null, // первый операнд операции
-    operator: null, // отложенная операция: '+', '-', '*', '/'
+    operator: null, // операция: '+', '-', '*', '/'
     waitingForOperand: false, // true - следующая цифра начнёт новое число
     error: false, // ошибка (деление на ноль)
     memory: loadMemory(), // значение памяти
@@ -44,6 +42,13 @@
     memoryIndicator.classList.toggle('hidden', state.memory === null);
   }
 
+  function updateClock() {
+    const now = new Date();
+    const hour = now.getHours();
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    statusTime.textContent = `${hour}:${minute}`;
+  }
+
   function setError() {
     state.error = true;
     state.current = 'Ошибка';
@@ -70,7 +75,7 @@
     try {
       if (state.memory === null) localStorage.removeItem(MEMORY_KEY);
       else localStorage.setItem(MEMORY_KEY, String(state.memory));
-    } catch (e) { /* напр. приватный режим — работаем без сохранения */ }
+    } catch (e) {}
     updateMemoryIndicator();
   }
 
@@ -128,14 +133,6 @@
     updateDisplay();
   }
 
-  function backspace() { // удаление последнего символа
-    if (state.error || state.waitingForOperand) return;
-    let text = state.current.slice(0, -1);
-    if (text === '' || text === '-') text = '0';
-    state.current = text;
-    updateDisplay();
-  }
-
   function clearAll() { // AC (память не трогает)
     state.current = '0';
     state.accumulator = null;
@@ -147,7 +144,6 @@
 
   // Операции
 
-  // null - деление на ноль
   function compute(a, operator, b) {
     switch (operator) {
       case '+': return a + b;
@@ -158,7 +154,6 @@
     }
   }
 
-  // при сложении/вычитании берёт процент от первого операнда (200 + 10 % = 20)
   function applyPercent() {
     if (state.error) return;
     const value = toNumber(state.current);
@@ -176,7 +171,6 @@
     if (state.error) return;
     const value = toNumber(state.current);
     if (state.operator !== null && !state.waitingForOperand) {
-      // цепочка операций: 2 + 3 * ... сначала считаем предыдущую операцию
       const result = compute(state.accumulator, state.operator, value);
       if (result === null) { setError(); return; }
       state.accumulator = result;
@@ -203,8 +197,6 @@
   }
 
   // События
-
-  // один обработчик на все кнопки
   buttonsContainer.addEventListener('click', (event) => {
     const button = event.target.closest('button');
     if (!button) return;
@@ -224,7 +216,9 @@
     }
   });
 
-  // Инициализация
+  updateClock();
   updateDisplay();
   updateMemoryIndicator();
+
+  setInterval(updateClock, 1000)
 })();
