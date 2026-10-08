@@ -1,0 +1,156 @@
+:root{
+  --accent:#F7B500;
+  --page:#d6d6d6;
+  --screen:#ececec;
+  --done:#2AD3A3;
+  --danger:#F01F1F;
+  --text:#2b2b2b;
+  --muted:#9b9b9b;
+}
+
+*{ box-sizing:border-box; }
+[hidden]{ display:none !important; }
+
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  background:var(--page);
+  font-family:"Segoe UI", Roboto, Arial, sans-serif;
+  display:flex;
+  justify-content:center;
+}
+
+.app{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  height:100%;
+  background:var(--screen);
+  box-shadow:0 0 24px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Экран 1: список / заглушка */
+#mainScreen{ padding:20px 16px 100px; overflow-y:auto; }
+
+.empty{
+  margin:auto;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+.empty svg{ display:block; margin:0 auto 14px; }
+
+.todo-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.task{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#fff;
+  border-radius:10px;
+  padding:12px 14px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+
+.task-check{
+  flex:0 0 24px;
+  width:24px;
+  height:24px;
+  padding:0;
+  border:none;
+  border-radius:50%;
+  background:#e3e3e3;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition:background .15s;
+}
+.task-check svg{ opacity:0; transition:opacity .15s; }
+
+.task.done .task-check{ background:var(--done); }
+.task.done .task-check svg{ opacity:1; }
+
+.task-text{
+  flex:1;
+  font-size:15px;
+  color:var(--text);
+  word-break:break-word;
+  white-space:pre-wrap;
+}
+.task.done .task-text{
+  text-decoration:line-through;
+  color:var(--muted);
+}
+
+.task-actions{ display:flex; gap:6px; }
+
+.icon-action{
+  border:none;
+  background:none;
+  padding:4px;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  border-radius:6px;
+}
+.icon-action:hover{ background:rgba(0,0,0,.06); }
+
+/* Кнопка "+" */
+.fab{
+  position:absolute;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%);
+  width:56px;
+  height:56px;
+  border:none;
+  border-radius:50%;
+  background:var(--accent);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  transition:transform .12s;
+  z-index:5;
+}
+.fab:active{ transform:translateX(-50%) scale(.93); }
+
+/* Экран 2: создание / редактирование */
+#modalScreen{ background:var(--screen); z-index:10; }
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+}
+
+#taskInput{
+  flex:1;
+  width:100%;
+  border:none;
+  outline:none;
+  resize:none;
+  background:transparent;
+  padding:10px 24px;
+  font:inherit;
+  font-size:16px;
+  color:var(--text);
+}
+#taskInput::placeholder{ color:#b6b6b6; }
