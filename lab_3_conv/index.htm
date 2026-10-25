@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Конвертер валют</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- ЭКРАН 1: Конвертер -->
+  <section class="screen active" id="screen-main">
+    <div class="statusbar">
+      <span>9:41</span>
+      <span class="sb-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="#000"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="4.8" width="3" height="6.2" rx="1"/><rect x="9.2" y="2.4" width="3" height="8.6" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.6 9.6 0 0 1 13 0"/><path d="M4 6.8a6 6 0 0 1 8 0"/><circle cx="8" cy="9.8" r="1.4" fill="#000" stroke="none"/></svg>
+        <svg width="24" height="12" viewBox="0 0 24 12"><rect x=".5" y=".5" width="20" height="11" rx="3.2" fill="none" stroke="#000" stroke-opacity=".35"/><rect x="2.2" y="2.2" width="16.6" height="7.6" rx="2" fill="#000"/><path d="M22.2 4v4a2.2 2.2 0 0 0 0-4z" fill="#000" fill-opacity=".35"/></svg>
+      </span>
+    </div>
+    <h1 class="screen-title">Конвертер валют</h1>
+
+    <!-- Карточка валюты FROM -->
+    <div class="card" id="card-from">
+      <button class="cur-head" type="button" data-slot="from">
+        <span class="cur-code">RUB</span>
+        <span class="cur-name">Российский рубль</span>
+        <span class="chev">›</span>
+      </button>
+      <div class="value-field" data-slot="from"><span class="value"></span></div>
+    </div>
+
+    <!-- Карточка валюты TO -->
+    <div class="card" id="card-to">
+      <button class="cur-head" type="button" data-slot="to">
+        <span class="cur-code">USD</span>
+        <span class="cur-name">Доллар США</span>
+        <span class="chev">›</span>
+      </button>
+      <div class="value-field" data-slot="to"><span class="value"></span></div>
+    </div>
+
+    <!-- Клавиатура -->
+    <div class="keypad">
+      <button class="key key-ac"   type="button" id="key-ac">AC</button>
+      <button class="key key-back" type="button" id="key-back" aria-label="Удалить символ">⌫</button>
+      <button class="key" type="button" data-digit="7">7</button>
+      <button class="key" type="button" data-digit="8">8</button>
+      <button class="key" type="button" data-digit="9">9</button>
+      <button class="key" type="button" data-digit="4">4</button>
+      <button class="key" type="button" data-digit="5">5</button>
+      <button class="key" type="button" data-digit="6">6</button>
+      <button class="key" type="button" data-digit="1">1</button>
+      <button class="key" type="button" data-digit="2">2</button>
+      <button class="key" type="button" data-digit="3">3</button>
+      <button class="key key-zero" type="button" data-digit="0">0</button>
+      <button class="key" type="button" data-digit=",">,</button>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 2: Выбор валюты -->
+  <section class="screen" id="screen-choose">
+    <div class="statusbar">
+      <span>9:41</span>
+      <span class="sb-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="#000"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="4.8" width="3" height="6.2" rx="1"/><rect x="9.2" y="2.4" width="3" height="8.6" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1"/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.2a9.6 9.6 0 0 1 13 0"/><path d="M4 6.8a6 6 0 0 1 8 0"/><circle cx="8" cy="9.8" r="1.4" fill="#000" stroke="none"/></svg>
+        <svg width="24" height="12" viewBox="0 0 24 12"><rect x=".5" y=".5" width="20" height="11" rx="3.2" fill="none" stroke="#000" stroke-opacity=".35"/><rect x="2.2" y="2.2" width="16.6" height="7.6" rx="2" fill="#000"/><path d="M22.2 4v4a2.2 2.2 0 0 0 0-4z" fill="#000" fill-opacity=".35"/></svg>
+      </span>
+    </div>
+
+    <div class="choose-header">
+      <button class="back-btn" type="button" id="btn-back" aria-label="Назад">←</button>
+      <span class="choose-title">Изменить валюту</span>
+      <span></span>
+    </div>
+
+    <div class="search-row">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="search-input" type="text" placeholder="Search currency..." autocomplete="off">
+      <button class="clear-search" type="button" id="clear-search" aria-label="Очистить поиск">⊗</button>
+    </div>
+
+    <ul id="currency-list"></ul>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
