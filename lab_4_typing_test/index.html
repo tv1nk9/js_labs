@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#292d34">
+  <title>TypingTest — тренажёр скорости печати</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-heading">
+    <span>Тренажёр печати</span>
+    <span>Проверь свою скорость</span>
+  </div>
+
+  <main class="app" aria-label="Тест скорости печати">
+    <div class="brand" aria-label="TypingTest">
+      <span class="brand-mark" aria-hidden="true">ϟ</span>
+      <span>TypingTest</span>
+    </div>
+
+    <section class="toolbar" aria-label="Настройки теста">
+      <div class="toolbar-group" aria-label="Режим теста">
+        <button class="chip active" id="time-mode" type="button" aria-pressed="true">
+          <span class="mode-label">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5.5v3.2l2 1.2M6 1.5h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Время
+          </span>
+        </button>
+        <button class="chip" id="words-mode" type="button" aria-pressed="false">Слова</button>
+      </div>
+      <span class="toolbar-divider" aria-hidden="true"></span>
+      <div class="toolbar-group" id="time-options" aria-label="Длительность теста">
+        <button class="chip" data-value="15" type="button">15</button>
+        <button class="chip active" data-value="30" type="button">30</button>
+        <button class="chip" data-value="60" type="button">60</button>
+        <button class="chip" data-value="120" type="button">120</button>
+      </div>
+      <div class="toolbar-group hidden" id="words-options" aria-label="Количество слов">
+        <button class="chip" data-value="10" type="button">10</button>
+        <button class="chip active" data-value="25" type="button">25</button>
+        <button class="chip" data-value="50" type="button">50</button>
+        <button class="chip" data-value="100" type="button">100</button>
+      </div>
+    </section>
+
+    <div class="test-meta" id="test-meta" aria-live="polite">
+      <span id="meta-mode">Время</span>
+      <strong id="meta-value">30 с</strong>
+      <span id="meta-status">ожидание</span>
+    </div>
+
+    <section class="typing-zone" id="typing-zone" aria-label="Поле для печати">
+      <div class="typing-text" id="typing-text"></div>
+      <div class="typing-placeholder" id="typing-placeholder">Нажмите «Начать тест» или начните печатать</div>
+      <textarea class="capture-input" id="capture-input" aria-label="Введите текст с клавиатуры" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text"></textarea>
+    </section>
+
+    <section class="result-view hidden" id="result-view" aria-live="polite">
+      <div class="result-eyebrow">Тест завершён</div>
+      <h1 class="result-title">Ваш результат</h1>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Скорость</div><div class="stat-value" id="result-wpm">0</div></div>
+        <div class="stat"><div class="stat-label">Точность</div><div class="stat-value" id="result-accuracy">0%</div></div>
+        <div class="stat"><div class="stat-label">Символы</div><div class="stat-value" id="result-chars">0</div></div>
+        <div class="stat"><div class="stat-label">Ошибки</div><div class="stat-value" id="result-errors">0</div></div>
+        <div class="stat"><div class="stat-label">Время</div><div class="stat-value" id="result-time">0с</div></div>
+      </div>
+      <p class="result-note" id="result-note"></p>
+      <div class="actions result-actions">
+        <button class="action" id="restart-result" type="button">Заново <span class="arrow">↻</span></button>
+        <button class="action primary" id="next-test" type="button">Следующий тест <span class="arrow">›</span></button>
+      </div>
+    </section>
+
+    <div class="actions" id="test-actions">
+      <button class="action primary" id="start-test" type="button">Начать тест <span class="arrow">›</span></button>
+      <button class="action hidden" id="restart-test" type="button">Заново <span class="arrow">↻</span></button>
+    </div>
+
+    <p class="helper" id="helper"><kbd>Esc</kbd> — сбросить тест</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
